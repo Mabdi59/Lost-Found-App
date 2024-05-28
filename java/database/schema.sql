@@ -6,9 +6,9 @@ DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS claims;
 DROP TABLE IF EXISTS notifications;
 DROP TABLE IF EXISTS item_images;
+DROP TABLE IF EXISTS users;
 
 -- Create users table
-DROP TABLE IF EXISTS users;
 CREATE TABLE users (
      user_id SERIAL,
      username VARCHAR(50) NOT NULL UNIQUE,
