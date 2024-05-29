@@ -1,4 +1,4 @@
-import axios from 'axios';
+import ImageService from '../services/ImageService';
 
 const state = {
   images: []
@@ -10,19 +10,11 @@ const getters = {
 
 const actions = {
   async fetchImages({ commit }, itemId) {
-    const response = await axios.get(`/api/items/${itemId}/images`);
+    const response = await ImageService.getImages(itemId);
     commit('setImages', response.data);
   },
   async uploadImage({ commit }, { itemId, image }) {
-    const formData = new FormData();
-    formData.append('image', image);
-
-    const response = await axios.post(`/api/items/${itemId}/images`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    });
-
+    const response = await ImageService.uploadImage(itemId, image);
     commit('newImage', response.data);
   }
 };

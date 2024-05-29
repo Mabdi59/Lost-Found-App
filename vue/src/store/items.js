@@ -1,4 +1,4 @@
-import axios from 'axios';
+import ItemService from '../services/ItemService';
 
 const state = {
   items: []
@@ -10,15 +10,15 @@ const getters = {
 
 const actions = {
   async fetchItems({ commit }) {
-    const response = await axios.get('/api/items');
+    const response = await ItemService.getItems();
     commit('setItems', response.data);
   },
   async addItem({ commit }, item) {
-    const response = await axios.post('/api/items', item);
+    const response = await ItemService.addItem(item);
     commit('newItem', response.data);
   },
   async deleteItem({ commit }, id) {
-    await axios.delete(`/api/items/${id}`);
+    await ItemService.deleteItem(id);
     commit('removeItem', id);
   }
 };

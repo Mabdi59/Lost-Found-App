@@ -1,4 +1,4 @@
-import axios from 'axios';
+import ClaimService from '../services/ClaimService';
 
 const state = {
   claims: []
@@ -10,15 +10,15 @@ const getters = {
 
 const actions = {
   async fetchClaims({ commit }) {
-    const response = await axios.get('/api/claims');
+    const response = await ClaimService.getClaims();
     commit('setClaims', response.data);
   },
   async addClaim({ commit }, claim) {
-    const response = await axios.post('/api/claims', claim);
+    const response = await ClaimService.addClaim(claim);
     commit('newClaim', response.data);
   },
   async deleteClaim({ commit }, id) {
-    await axios.delete(`/api/claims/${id}`);
+    await ClaimService.deleteClaim(id);
     commit('removeClaim', id);
   }
 };

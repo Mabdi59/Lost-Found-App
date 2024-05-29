@@ -1,4 +1,4 @@
-import axios from 'axios';
+import CategoryService from '../services/CategoryService';
 
 const state = {
   categories: []
@@ -10,15 +10,15 @@ const getters = {
 
 const actions = {
   async fetchCategories({ commit }) {
-    const response = await axios.get('/api/categories');
+    const response = await CategoryService.getCategories();
     commit('setCategories', response.data);
   },
   async addCategory({ commit }, category) {
-    const response = await axios.post('/api/categories', category);
+    const response = await CategoryService.addCategory(category);
     commit('newCategory', response.data);
   },
   async deleteCategory({ commit }, id) {
-    await axios.delete(`/api/categories/${id}`);
+    await CategoryService.deleteCategory(id);
     commit('removeCategory', id);
   }
 };

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import NotificationService from '../services/NotificationService';
 
 const state = {
   notifications: []
@@ -10,11 +10,11 @@ const getters = {
 
 const actions = {
   async fetchNotifications({ commit }) {
-    const response = await axios.get('/api/notifications');
+    const response = await NotificationService.getNotifications();
     commit('setNotifications', response.data);
   },
   async markAsRead({ commit }, id) {
-    await axios.put(`/api/notifications/${id}`);
+    await NotificationService.markAsRead(id);
     commit('markNotificationAsRead', id);
   }
 };
